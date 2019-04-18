@@ -1,6 +1,7 @@
 # FIXME: Rework standalone build in more generic maner
 # (Restructure directories, add common pass, etc)
 if (NOT DEFINED OPENCV_INITIAL_PASS)
+    cmake_minimum_required(VERSION 3.3)
     include("cmake/standalone.cmake")
     return()
 endif()
@@ -30,7 +31,7 @@ file(GLOB gapi_ext_hdrs
 
 set(gapi_srcs
     # Front-end part
-    src/api/gapi_priv.cpp
+    src/api/gorigin.cpp
     src/api/gmat.cpp
     src/api/garray.cpp
     src/api/gscalar.cpp

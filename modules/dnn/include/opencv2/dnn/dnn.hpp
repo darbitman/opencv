@@ -381,6 +381,16 @@ CV__DNN_INLINE_NS_BEGIN
         /** Returns true if there are no layers in the network. */
         CV_WRAP bool empty() const;
 
+        /** @brief Dump net to String
+         *  @returns String with structure, hyperparameters, backend, target and fusion
+         *  To see correct backend, target and fusion run after forward().
+         */
+        CV_WRAP String dump();
+        /** @brief Dump net structure, hyperparameters, backend, target and fusion to dot file
+         *  @param path   path to output file with .dot extension
+         *  @see dump()
+         */
+        CV_WRAP void dumpToFile(const String& path);
         /** @brief Adds new layer to the net.
          *  @param name   unique name of the adding layer.
          *  @param type   typename of the adding layer (type must be registered in LayerRegister).
@@ -955,13 +965,6 @@ CV__DNN_INLINE_NS_BEGIN
                              CV_OUT std::vector<int>& indices,
                              const float eta = 1.f, const int top_k = 0);
 
-    /** @brief Release a Myriad device is binded by OpenCV.
-     *
-     * Single Myriad device cannot be shared across multiple processes which uses
-     * Inference Engine's Myriad plugin.
-     */
-    CV_EXPORTS_W void resetMyriadDevice();
-
 //! @}
 CV__DNN_INLINE_NS_END
 }
@@ -969,5 +972,8 @@ CV__DNN_INLINE_NS_END
 
 #include <opencv2/dnn/layer.hpp>
 #include <opencv2/dnn/dnn.inl.hpp>
+
+/// @deprecated Include this header directly from application. Automatic inclusion will be removed
+#include <opencv2/dnn/utils/inference_engine.hpp>
 
 #endif  /* OPENCV_DNN_DNN_HPP */
